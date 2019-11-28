@@ -1,7 +1,7 @@
 module.exports = [
     {
-        title: 'vuePress 使用',
-        collapsable: false,
+        title: 'vuePress',
+        collapsable: true,
         children: [
             '/guide/notes/vuePress'
         ]

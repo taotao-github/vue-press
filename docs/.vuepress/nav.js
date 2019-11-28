@@ -1,4 +1,4 @@
-module.exports = [ // 导航栏配置
+module.exports = [ // 导航栏配置 nav.js
     {
         text: '前端基础',
         items: [

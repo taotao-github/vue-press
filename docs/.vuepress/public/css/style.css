@@ -1,0 +1,4 @@
+/*--修改默认主题内容区域的宽度--*/
+.theme-default-content:not(.custom) {
+    max-width: unset !important;
+}
