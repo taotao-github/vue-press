@@ -3,16 +3,14 @@ module.exports = [ // 导航栏配置 nav.js
         text: '前端基础',
         items: [
             {text: 'ECMAScript 6', link: '/front-base/ES6/'},
-            {text: 'html', link: '/guide/'},
+            {text: 'html', link: '/front-base/html/'},
         ]
     },
     {
         text: '拓展',
         items: [
             {text: 'git', link: '/expand/git/'},
-            {text: '数据库', items: [
-                {text: 'Mongodb', link: '/expand/mongodb/'}                
-            ]}
+            {text: 'mongodb', link: '/expand/mongodb/'}
         ]
     },
     { text: '算法题库', link: '/algorithm/' },
