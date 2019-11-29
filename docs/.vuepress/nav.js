@@ -9,7 +9,10 @@ module.exports = [ // 导航栏配置 nav.js
     {
         text: '拓展',
         items: [
-            {text: 'git', link: '/expand/git/'}
+            {text: 'git', link: '/expand/git/'},
+            {text: '数据库', items: [
+                {text: 'Mongodb', link: '/expand/mongodb/'}                
+            ]}
         ]
     },
     { text: '算法题库', link: '/algorithm/' },
