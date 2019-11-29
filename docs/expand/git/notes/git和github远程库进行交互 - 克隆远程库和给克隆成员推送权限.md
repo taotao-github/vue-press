@@ -52,9 +52,9 @@ DELL@DESKTOP-53JS0A9 MINGW64 /e/git_test/other_member/zt_git_test (master)
 
 ## 将克隆成员加入团队
 
-![github将克隆成员加入团队](/images/git/github将克隆成员加入团队.jpg)
+<img :src="$withBase('/images/git/github将克隆成员加入团队.jpg')" alt="--soft">
 
-![github将克隆成员加入团队2](/images/git/github将克隆成员加入团队2.jpg)
+<img :src="$withBase('/images/git/github将克隆成员加入团队2.jpg')" alt="--soft">
 
 上面都是创建者的操作，接下来就是克隆成员的操作了：
 
