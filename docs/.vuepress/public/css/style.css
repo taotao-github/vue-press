@@ -2,3 +2,6 @@
 .theme-default-content:not(.custom) {
     max-width: unset !important;
 }
+.page-nav {
+    max-width: unset !important;
+}
