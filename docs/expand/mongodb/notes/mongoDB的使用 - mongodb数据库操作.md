@@ -1,7 +1,7 @@
 # mongodb 数据库操作
 
 ## 1、查看所有数据库列表
-```
+```bash
 > show dbs
 admin    0.000GB
 config   0.000GB
@@ -10,14 +10,14 @@ local    0.000GB>
 
 ## 2、创建数据库 || 使用数据库
 
-```
+```bash
 > use student
 switched to db student
 >
 ```
 此时数据并没有真正的创建成功，要想创建成功就必须在新建一个集合（表）并插入一条数据。
 
-```
+```bash
 > use student
 switched to db student
 > db. student_info.insert({"name":"zhangsan","age":"23"})
@@ -30,26 +30,26 @@ WriteResult({ "nInserted" : 1 })  // 插入成功
 
 通过 show collections 可以查看当前数据库中的所有集合（表）
 
-```
+```bash
 > show collections
-student_info // 当前只有一个集合（表）
+student_info # 当前只有一个集合（表）
 >
 ```
 ## 3、删除数据库 || 删除集合（表）
 
 1.  删除数据库
 
-```
-> db. dropDatabase()  // 删除当前所在的数据库
-{ "dropped" : "student", "ok" : 1 }   // 删除成功
+```bash
+> db. dropDatabase()  # 删除当前所在的数据库
+{ "dropped" : "student", "ok" : 1 }   # 删除成功
 >
 ```
 
 2.  删除集合（表）
 
-```
+```bash
 > db.student_info.drop()
-true // 返回一个布尔值，true 表示删除表成功
+true # 返回一个布尔值，true 表示删除表成功
 >
 ```
 ## 4、插入（增加）数据
@@ -61,7 +61,7 @@ true // 返回一个布尔值，true 表示删除表成功
 - 查询所有数据
   **db.collectionsName.find()**
 
-  ```
+  ```bash
   > db.student.find()
   { "_id" : ObjectId("5cafe456ed4fe960abcfa70d"), "name" :   "zhangshan", "age" : 23 }
   { "_id" : ObjectId("5cafe48eed4fe960abcfa70e"), "name"   : "zhangshan", "age" : 24, "sex" : "男" }
@@ -78,8 +78,8 @@ true // 返回一个布尔值，true 表示删除表成功
 
 - 查询去掉当前集合中某列（某个属性）重复数据后的数据
   **db.collectionsName.distinct(keyName)**
-  ```
-  > db.student.distinct(“name”)
+  ```bash
+  > db.student.distinct("name")
   [
       "zhangshan",
       "lisi",
@@ -94,8 +94,8 @@ true // 返回一个布尔值，true 表示删除表成功
   >
   ```
 - 查询 age=24 的记录
-  ```
-  > db.student.find({“age”: 24})
+  ```bash
+  > db.student.find({"age": 24})
   { "_id" : ObjectId("5cafe48eed4fe960abcfa70e"), "name" : "zhangshan", "age" : 24, "sex" : "男" }
   { "_id" : ObjectId("5cafe50aed4fe960abcfa711"), "name" : "wangjing", "age" : 24, "sex" : "女" }
   { "_id" : ObjectId("5cafe522ed4fe960abcfa712"), "name" : "guanghui", "age" : 24, "sex" : "女" }
@@ -103,8 +103,8 @@ true // 返回一个布尔值，true 表示删除表成功
   ```
 
 - 查询 age>24 的记录
-  ```
-  > db.student.find({“age”: {$gt:24}})
+  ```bash
+  > db.student.find({"age": {$gt:24}})
   { "_id" : ObjectId("5cafe4deed4fe960abcfa70f"), "name" : "lisi", "age" : 28, "sex" : "男" }
   { "_id" : ObjectId("5cafe4f5ed4fe960abcfa710"), "name" : "wangwu", "age" : 32, "sex" : "男" }
   { "_id" : ObjectId("5cafe549ed4fe960abcfa714"), "name" : "jianhao", "age" : 30, "sex" : "男" }
@@ -113,16 +113,17 @@ true // 返回一个布尔值，true 表示删除表成功
 
   ```
 - 查询 age<24 的记录
-  ```
-  > db.student.find({“age”: {\$lt:24}})
+  ```bash
+  > db.student.find({"age": {$lt:24}})
   { "_id" : ObjectId("5cafe456ed4fe960abcfa70d"), "name" : "zhangshan", "age" : 23 }
-  { "_id" : ObjectId("5cafe533ed4fe960abcfa713"), "name" : "weien", "age" : 22, "sex" : "女" }{ "_id" : ObjectId("5cafe573ed4fe960abcfa716"), "name" : "xiaopao", "age" : 20, "sex" : "男" }
+  { "_id" : ObjectId("5cafe533ed4fe960abcfa713"), "name" : "weien", "age" : 22, "sex" : "女" }
+  { "_id" : ObjectId("5cafe573ed4fe960abcfa716"), "name" : "xiaopao", "age" : 20, "sex" : "男" }
   >
   ```
 
 - 查询 age>=24 的记录
-  ```
-  > db.student.find({“age”: {\$gte:24}}) // e ==> equal 
+  ```bash
+  > db.student.find({"age": {$gte:24}}) # e ==> equal 
   { "_id" : ObjectId("5cafe48eed4fe960abcfa70e"), "name" : "zhangshan", "age" : 24, "sex" : "男" }
   { "_id" : ObjectId("5cafe4deed4fe960abcfa70f"), "name" : "lisi", "age" : 28, "sex" : "男" }
   { "_id" : ObjectId("5cafe4f5ed4fe960abcfa710"), "name" : "wangwu", "age" : 32, "sex" : "男" }
@@ -135,8 +136,8 @@ true // 返回一个布尔值，true 表示删除表成功
 
 
 - 查询 age<=24 的记录
-  ```
-  > db.student.find({“age”: {\$lte:24}})
+  ```bash
+  > db.student.find({"age": {$lte:24}})
   { "_id" : ObjectId("5cafe456ed4fe960abcfa70d"), "name" : "zhangshan", "age" : 23 }
   { "_id" : ObjectId("5cafe48eed4fe960abcfa70e"), "name" : "zhangshan", "age" : 24, "sex" : "男" }
   { "_id" : ObjectId("5cafe50aed4fe960abcfa711"), "name" : "wangjing", "age" : 24, "sex" : "女" }
@@ -147,35 +148,36 @@ true // 返回一个布尔值，true 表示删除表成功
 
   ```
 - 查询 age>23 并且 age<28 的记录
-  ```
-  > db.student.find({“age”: {$lte:28,$gte:23}})
+  ```bash
+  > db.student.find({"age": {$lte:28,$gte:23}})
   { "_id" : ObjectId("5cafe48eed4fe960abcfa70e"), "name" : "zhangshan", "age" : 24, "sex" : "男" }
   { "_id" : ObjectId("5cafe50aed4fe960abcfa711"), "name" : "wangjing", "age" : 24, "sex" : "女" }
   { "_id" : ObjectId("5cafe522ed4fe960abcfa712"), "name" : "guanghui", "age" : 24, "sex" : "女" }
   >
   ```
 
-- 查询 name 中包含‘ang’字符串的数据（模糊查询）
-  ```
-  > db.student.find({“name”:/ang/ })
+- 查询 name 中包含'ang'字符串的数据（模糊查询）
+  ```bash
+  > db.student.find({"name":/ang/ })
   { "_id" : ObjectId("5cafe456ed4fe960abcfa70d"), "name" : "zhangshan", "age" : 23 }
   { "_id" : ObjectId("5cafe48eed4fe960abcfa70e"), "name" : "zhangshan", "age" : 24, "sex" : "男" }
-  { "_id" : ObjectId("5cafe4f5ed4fe960abcfa710"), "name" : "wangwu", "age" : 32, "sex" : "男" }{ "\_id" : ObjectId("5cafe50aed4fe960abcfa711"), "name" : "wangjing", "age" : 24, "sex" : "女" }
+  { "_id" : ObjectId("5cafe4f5ed4fe960abcfa710"), "name" : "wangwu", "age" : 32, "sex" : "男" }
+  { "_id" : ObjectId("5cafe50aed4fe960abcfa711"), "name" : "wangjing", "age" : 24, "sex" : "女" }
   { "_id" : ObjectId("5cafe522ed4fe960abcfa712"), "name" : "guanghui", "age" : 24, "sex" : "女" }
   >
   ```
 
-- 查询 name 中以‘jian’开头的数据
-  ```
-  > db.student.find({“name”:/^jian/ })
+- 查询 name 中以'jian'开头的数据
+  ```bash
+  > db.student.find({"name":/^jian/ })
   { "_id" : ObjectId("5cafe549ed4fe960abcfa714"), "name" : "jianhao", "age" : 30, "sex" : "男" }
   { "_id" : ObjectId("5cafe558ed4fe960abcfa715"), "name" : "jiansheng", "age" : 34, "sex" : "男" }
   >
   ```
 
 - 查询指定列 name 和 age 的数据（返回数据中只有 name 和 age 属性的数据）
-  ```
-  > db.student.find({},{“name”:1, “age”: 1 })
+  ```bash
+  > db.student.find({},{"name":1, "age": 1 })
   { "_id" : ObjectId("5cafe456ed4fe960abcfa70d"), "name" : "zhangshan", "age" : 23 }
   { "_id" : ObjectId("5cafe48eed4fe960abcfa70e"), "name" : "zhangshan", "age" : 24 }
   { "_id" : ObjectId("5cafe4deed4fe960abcfa70f"), "name" : "lisi", "age" : 28 }
@@ -192,8 +194,8 @@ true // 返回一个布尔值，true 表示删除表成功
 > <font color=00ff00>>当然 name 也可以使用 true 和 false，当使用 true 的情况下和 name:1 的效果是一样的，选用 false 就表示排除 name，显示 name 以外的其他列信息。</font>
 
 - 查询指定列 name、age 数据, age > 25
-  ```
-  > db.student.find({"age":{\$gt: 25}},{"name":1, "age": 1 })
+  ```bash
+  > db.student.find({"age":{$gt: 25}},{"name":1, "age": 1 })
   { "_id" : ObjectId("5cafe4deed4fe960abcfa70f"), "name" : "lisi", "age" : 28 }
   { "_id" : ObjectId("5cafe4f5ed4fe960abcfa710"), "name" : "wangwu", "age" : 32 }
   { "_id" : ObjectId("5cafe549ed4fe960abcfa714"), "name" : "jianhao", "age" : 30 }
@@ -201,21 +203,21 @@ true // 返回一个布尔值，true 表示删除表成功
   ```
 
 - 按年龄排序
-  ```
-  > db.student.find().sort({age:1}) // 升序
-  > db.student.find().sort({age:-1}) //降序
+  ```bash
+  > db.student.find().sort({age:1}) # 升序
+  > db.student.find().sort({age:-1}) # 降序
   ```
   **1 代表升序      -1 代表降序**
 
 - 查询 name=zhangshan 并且 age=24 的数据（多条件查询）
-  ```
-  > db.student.find({“name”:”zhangsan”,”age”:24})
+  ```bash
+  > db.student.find({"name":"zhangsan","age":24})
   { "_id" : ObjectId("5cafe48eed4fe960abcfa70e"), "name" : "zhangshan", "age" : 24, "sex" : "男" }
   >
   ```
 
-- 查询前 5 条数据
-  ```
+- 固定查询 5 条数据
+  ```bash
   > db.student.find().limit(5)
   { "_id" : ObjectId("5cafe456ed4fe960abcfa70d"), "name" : "zhangshan", "age" : 23 }
   { "_id" : ObjectId("5cafe48eed4fe960abcfa70e"), "name" : "zhangshan", "age" : 24, "sex" : "男" }
@@ -226,7 +228,7 @@ true // 返回一个布尔值，true 表示删除表成功
   ```
 
 - 查询 5 条以后的数据
-  ```
+  ```bash
   > db.student.find().skip(5)
   { "_id" : ObjectId("5cafe522ed4fe960abcfa712"), "name" : "guanghui", "age" : 24, "sex" : "女" }
   { "_id" : ObjectId("5cafe533ed4fe960abcfa713"), "name" : "weien", "age" : 22, "sex" : "女" }
@@ -236,7 +238,7 @@ true // 返回一个布尔值，true 表示删除表成功
   ```
 
 - 查询 7-10 之间的数据
-  ```
+  ```bash
   > db.student.find().skip(7). limit(3)
   
   { "_id" : ObjectId("5cafe549ed4fe960abcfa714"), "name" : "jianhao", "age" : 30, "sex" : "男" }
@@ -245,25 +247,25 @@ true // 返回一个布尔值，true 表示删除表成功
   >
   ```
   适用于做分页操作，如下：
-  ```
-  > db.student.find().skip(0). limit(2)            // 第 1 页
+  ```bash
+  > db.student.find().skip(0). limit(2) # 第 1 页
   { "_id" : ObjectId("5cafe456ed4fe960abcfa70d"), "name" : "zhangshan", "age" : 23 }
   { "_id" : ObjectId("5cafe48eed4fe960abcfa70e"), "name" : "zhangshan", "age" : 24, "sex" : "男" }
-  >db.student.find().skip(2). limit(2)            // 第 2 页
+  >db.student.find().skip(2). limit(2) # 第 2 页
   { "_id" : ObjectId("5cafe4deed4fe960abcfa70f"), "name" : "lisi", "age" : 28, "sex" : "男" }
   { "_id" : ObjectId("5cafe4f5ed4fe960abcfa710"), "name" : "wangwu", "age" : 32, "sex" : "男" }
-  > db.student.find().skip(4). limit(2)            // 第 3 页
+  > db.student.find().skip(4). limit(2) # 第 3 页
   { "_id" : ObjectId("5cafe50aed4fe960abcfa711"), "name" : "wangjing", "age" : 24, "sex" : "女" }
   { "_id" : ObjectId("5cafe522ed4fe960abcfa712"), "name" : "guanghui", "age" : 24, "sex" : "女" }
-  > db.student.find().skip(6). limit(2)            // 第 4 页
+  > db.student.find().skip(6). limit(2) # 第 4 页
   { "_id" : ObjectId("5cafe533ed4fe960abcfa713"), "name" : "weien", "age" : 22, "sex" : "女" }
   { "_id" : ObjectId("5cafe549ed4fe960abcfa714"), "name" : "jianhao", "age" : 30, "sex" : "男" }
   ```
-  \* Skip(n) 与 limit(m)和 pageNum(p)的关系：n= (p-1)\*m
+  **Skip(n) 与 limit(m)和 pageNum(p)的关系：n= (p-1)\*m**
 
 - or 查询（查询 age=24 或者 age=28 的数据）
-  ```
-  > db.student.find({$or:[{“age”:23},{“age”:28}]})
+  ```bash
+  > db.student.find({$or:[{"age":23},{"age":28}]})
   { "_id" : ObjectId("5cafe48eed4fe960abcfa70e"), "name" : "zhangshan", "age" : 24, "sex" : "男" }
   { "_id" : ObjectId("5cafe4deed4fe960abcfa70f"), "name" : "lisi", "age" : 28, "sex" : "男" }
   { "_id" : ObjectId("5cafe50aed4fe960abcfa711"), "name" : "wangjing", "age" : 24, "sex" : "女" }
@@ -272,7 +274,7 @@ true // 返回一个布尔值，true 表示删除表成功
   ```
 
 - findOne 查询第一条数据
-  ```
+  ```bash
   > db.student.findOne()
   { "_id" : ObjectId("5cafe456ed4fe960abcfa70d"), "name" : "zhangshan", "age" : 23}
   >
@@ -280,51 +282,51 @@ true // 返回一个布尔值，true 表示删除表成功
 
 - 查询某个结果集的记录条数（统计数量）
   统计 age>23 数据条数
-  ```
-  > db.student.find({“age”:{\$gt:23}}).count()
+  ```bash
+  > db.student.find({"age":{$gt:23}}).count()
   >
   ```
 
 - 使用 mongodb \$type 查询相同类型的数据。
-  $type 操作符是基于 BSON 类型来检索集合中匹配的数据类型，并返回结果。
+  \$type 操作符是基于 BSON 类型来检索集合中匹配的数据类型，并返回结果。
   MongoDB 中可以使用的类型如下表所示
-  | 类型           | 数字    |  备注  |
-  | --------   | -----:  | :----: |
-  | Double        | 1      |       |
-  | String        | 2      |       |
-  | Object        | 3      |       |
-  | Array        | 4      |       |
-  | Binary data        | 5      |       |
-  | Undefined        | 6      | 已废弃      |
-  | Object id        | 7      |       |
-  | Boolean        | 8      |       |
-  | Date        | 9      |       |
-  | Null        | 10      |       |
-  | Regular Expression        | 11      |       |
-  | JavaScript        | 13     |       |
-  | Symbol        | 14      |       |
-  | JavaScript (with scope)        | 15      |       |
-  | 32-bit integer        | 16      |       |
-  | Timestamp        | 17      |       |
-  | 64-bit integer        | 18      |       |
-  | Min key        | 255      |   query with -1    |
-  | Max key        | 127      |       |
-  ```
-  > db.student.find({“age”:{$type: 2}})
+  | 类型                    | 数字   |  备注               |
+  | --------                | -----: | :----:             |
+  | Double                  | 1      |                    |
+  | String                  | 2      |                    |
+  | Object                  | 3      |                    |
+  | Array                   | 4      |                    |
+  | Binary data             | 5      |                    |
+  | Undefined               | 6      | 已废弃             |
+  | Object id               | 7      |                    |
+  | Boolean                 | 8      |                    |
+  | Date                    | 9      |                    |
+  | Null                    | 10     |                    |
+  | Regular Expression      | 11     |                    |
+  | JavaScript              | 13     |                    |
+  | Symbol                  | 14     |                    |
+  | JavaScript (with scope) | 15     |                    |
+  | 32-bit integer          | 16     |                    |
+  | Timestamp               | 17     |                    |
+  | 64-bit integer          | 18     |                    |
+  | Min key                 | 255    |   query with -1    |
+  | Max key                 | 127    |                    |
+  ```bash
+  > db.student.find({"age":{$type: 2}})
   或者
-  > db.student.find({“age”:{$type: ‘string’}})// 查询 age 字段中所有数据类型为 string 的数据项
+  > db.student.find({"age":{$type: ‘string’}}) # 查询 age 字段中所有数据类型为 string 的数据项
   ```
 
 ## 6、修改数据
 - 基本形式：
-  ```
+  ```bash
   db.student.update({筛选条件},{$set:{修改内容}})
   如下：
-  db.student.update({“name”: “zhangshan”},{$set:{“age”: 16}})
+  db.student.update({"name": "zhangshan"},{$set:{"age": 16}})
   ```  
 
 - 初始数据：
-  ```json
+  ```bash
   > db.student.find()
   { "_id" : ObjectId("5cafe456ed4fe960abcfa70d"), "name" : "zhangshan", "age" : 23 }
   { "_id" : ObjectId("5cafe48eed4fe960abcfa70e"), "name" : "zhangshan", "age" : 24, "sex" : "男" }
@@ -340,17 +342,17 @@ true // 返回一个布尔值，true 表示删除表成功
   ```
 
 - 修改 Lisi 的年龄和性别
-  ```
-  > db.student.update({“name”:”lisi”},{\$set:{“age”:25,”sex”:”女”}})
+  ```bash
+  > db.student.update({"name":"lisi"},{$set:{"age":25,"sex":"女"}})
   WriteResult({ "nMatched" : 1, "nUpserted" : 0, "nModified" : 1 })
   > db.student.find()
-  { "\_id" : ObjectId("5cafe456ed4fe960abcfa70d"), "name" : "zhangshan", "age" : 23 }
-  { "\_id" : ObjectId("5cafe48eed4fe960abcfa70e"), "name" : "zhangshan", "age" : 24, "sex" : "男" }
-  { "\_id" : ObjectId("5cafe4deed4fe960abcfa70f"), "name" : "lisi", "age" : 25, "sex" : "女" }…
+  { "_id" : ObjectId("5cafe456ed4fe960abcfa70d"), "name" : "zhangshan", "age" : 23 }
+  { "_id" : ObjectId("5cafe48eed4fe960abcfa70e"), "name" : "zhangshan", "age" : 24, "sex" : "男" }
+  { "_id" : ObjectId("5cafe4deed4fe960abcfa70f"), "name" : "lisi", "age" : 25, "sex" : "女" }…
   >
   ```
   **注意：如果不使用\$set，效果就等于后面的 json 替换前面的 json**
-  ```
+  ```bash
   > db.student.update({"name":"wangwu"},{"sex":"女","like":"music"})
   WriteResult({ "nMatched" : 1, "nUpserted" : 0, "nModified" : 1 })
   > db.student.find()
@@ -362,8 +364,8 @@ true // 返回一个布尔值，true 表示删除表成功
   ```
 
 - guanghui 的年龄增加 20（类似 age=age+20）喜好改为 video
-  ```
-  > db.student.update({"name":"guanghui"},{$inc:{“age”:20},$set:{“like”:”video”}})
+  ```bash
+  > db.student.update({"name":"guanghui"},{$inc:{"age":20},$set:{"like":"video"}})
   WriteResult({ "nMatched" : 1, "nUpserted" : 0, "nModified" : 1 })
   > db.student.find()
   { "_id" : ObjectId("5cafe456ed4fe960abcfa70d"), "name" : "zhangshan", "age" : 23 }
@@ -381,7 +383,7 @@ true // 返回一个布尔值，true 表示删除表成功
   > db.student.remove({删除条件})；
 
 - 初始数据：
-  ```
+  ```bash
   > db.student.find()
   { "_id" : ObjectId("5cafe456ed4fe960abcfa70d"), "name" : "zhangshan", "age" : 23 }
   { "_id" : ObjectId("5cafe48eed4fe960abcfa70e"), "name" : "zhangshan", "age" : 24, "sex" : "男" }
@@ -397,8 +399,8 @@ true // 返回一个布尔值，true 表示删除表成功
   ```
 
 - 删除{"sex" : "女", "like" : "music" }
-  ```
-  > db.student.remove({“sex”:”女”,”like”:”music”})
+  ```bash
+  > db.student.remove({"sex":"女","like":"music"})
   WriteResult({ "nRemoved" : 1 })
   > db.student.find()
   { "_id" : ObjectId("5cafe456ed4fe960abcfa70d"), "name" : "zhangshan", "age" : 23 }
@@ -416,7 +418,7 @@ true // 返回一个布尔值，true 表示删除表成功
   **对于相同 name 属性的多条数据，可以通过多个删除条件删除指定的一条数据，也可以通过第二个参数{justOne: true}来删除第一个匹配条件的数据。**
   
   >删除第一个 zhangshan
-  ```
+  ```bash
   > db.student.remove("name":"zhangshan"}, {justOne:true})
   WriteResult({ "nRemoved" : 1 })
   > db.student.find()
@@ -438,7 +440,7 @@ true // 返回一个布尔值，true 表示删除表成功
 - aggregate 的基本语法格式：
   db.collectionName.aggregate(options)
   示例：
-  ```js
+  ```bash
   {
 
   _id: ObjectId(7df78ad8902c)
@@ -494,7 +496,7 @@ true // 返回一个布尔值，true 表示删除表成功
   }
   ```
   现在我们通过以上集合计算每个作者所写的文章数，使用 aggregate()计算结果如下：
-  ```
+  ```bash
   > db.mycol.aggregate([{$group : {_id : "$by_user", num_tutorial : {$sum : 1}}}])
   {
 
@@ -549,14 +551,16 @@ Mongodb 提供了强大的聚合操作，有 3 中方式：
 - 对文档进行转换，改变文档的输出形式。
 
 每个阶段使用**阶段操作符定义（Stage Operators）**，在每个阶段操作符中可以用**表达式操作符（Expression Operators）** 计算总和、平均值、拼接分割字符串等相关操作。直到每个阶段都执行完成，返回最终结果。返回的结果可以输出也可以存储在集合中。下面感受一下管道的用法：
-![管道的用法](/images/管道的用法示例.jpg)
+
+<img :src="$withBase('/images/mongodb/管道的用法示例.jpg')">
+
 
 对 order 集合进行筛选（status：A），然后根据 cust_id 分组，并计算分组后的 amount 总和。
 
 #### 9.1.1、阶段操作符（Stage Operators）
 
 - **范例数据：**
-  ``` json
+  ``` bash
   > db.article.find().pretty()
   {  
       "_id": ObjectId("58e1d2f0bb1bbc3245fa7570")  
@@ -589,17 +593,17 @@ Mongodb 提供了强大的聚合操作，有 3 中方式：
   作用：修改文档的结构。可以用来重命名、增加或者删除文档的字段
 
   示例：只返回文档中 title 和 author 字段
-  ```
+  ```bash
   > db.article.aggregate([{$project:{_id:0, title:1, author:1 }}])
   { "title": "MongoDB Aggregate", "author": "liruihuan" },  
   { "title": "MongoDB Index", "author": "liruihuan" },  
   { "title": "MongoDB Query", "author": "eryueyang" }
   >
   ```
-  因为字段\_id 是默认显示的，所有必须使用\_id: 0 来过滤掉\_id 字段。
+  因为字段_id 是默认显示的，所有必须使用_id: 0 来过滤掉_id 字段。
 
   示例：把文档中 pages 字段都增加 10，并重命名为 newpages。
-  ```
+  ```bash
   > db.article.aggregate([{$project:{_id:0, title:1, author:1, newpages: {$add:[ "$pages", 10 ]}}}])
   { "title" : "MongoDB Aggregate", "author" : "liruihuan", "newpages" : 15 }  
   { "title" : "MongoDB Index", "author" : "liruihuan", "newpages" : 13 }  
@@ -611,7 +615,7 @@ Mongodb 提供了强大的聚合操作，有 3 中方式：
   作用：用于过滤文档，用法类似 find()方法中的参数（查询条件）。
 
   示例：查询出 pages > 5 的数据
-  ```json
+  ```bash
   > db.article.aggregate([{$match: {"$pages":{$gt: 5}}}])
   { "_id" : ObjectId("5cbfd80286f30670093cef0b"), "title" : "MongoDB Aggregate", "author" : "liruihuan", "tags" : [ "Mongodb", "Database", "Query" ], "pages" : 5, "time" : ISODate("2017-04-09T11:42:39.736Z") }  
   { "_id" : ObjectId("5cbfd955abeb032fdde089f0"), "title" : "MongoDB Query", "author" : "eryueyang", "tags" : [ "Mongodb", "Query" ], "pages" : 8, "time" : ISODate("2017-04-09T11:44:56.276Z") }
@@ -628,7 +632,7 @@ Mongodb 提供了强大的聚合操作，有 3 中方式：
   作用：将集合的中的文档进行分组，可用于统计结果。
 
   示例：article 中得到每个 author 的文章数，输出 author 和对应的文章数。
-  ```
+  ```bash
   > db.article.aggregate([{$group: {"_id":"$author","articleNum":{$sum: 1}}}])
   { "_id" : "eryueyang", "articleNum" : 1 }  
   { "_id" : "liruihuan", "articleNum" : 2 }>
@@ -640,7 +644,7 @@ Mongodb 提供了强大的聚合操作，有 3 中方式：
   作用： 对文档结果进行排序。
 
   示例：让集合 article 以 pages 升序排列
-  ```
+  ```bash
   > db.article.aggregate([{$sort: {"pages": 1 }}]).pretty()
   {  
     "_id" : ObjectId("5cbfd8c286f30670093cef0c"), 
@@ -674,7 +678,7 @@ Mongodb 提供了强大的聚合操作，有 3 中方式：
   作用：限制返回的文档数量
 
   示例：返回集合 article 中前两条文档
-  ```
+  ```bash
   > db.article.aggregate([{$limit: 2 }])
   { 
     "_id" : ObjectId("5cbfd80286f30670093cef0b"), 
@@ -698,7 +702,7 @@ Mongodb 提供了强大的聚合操作，有 3 中方式：
   作用：跳过指定数量的文档，返回其后面的文档
 
   示例：跳过 article 集合中的第一条数据，返回剩下的数据
-  ```
+  ```bash
   > db.article.aggregate([{$skip: 1 }])
   { 
     "_id" : ObjectId("5cbfd8c286f30670093cef0c"), 
@@ -723,7 +727,7 @@ Mongodb 提供了强大的聚合操作，有 3 中方式：
   作用：将文档中的数组类型拆分为多条文档（去取决于数组长度），每个文档包含数组中的一个值。
 
   示例：把集合 article 中 title="MongoDB Aggregate" 的 tags 字段拆分
-  ```
+  ```bash
   > db.article.aggregate([{$match:{"title":"MongoDB Aggregate"}},{$unwind: "$tags"}]).pretty()
   {  
     "_id" : ObjectId("5cbfd80286f30670093cef0b"), 
@@ -768,7 +772,7 @@ Mongodb 提供了强大的聚合操作，有 3 中方式：
   |\$not|返回与参数表达式相反的布尔值。接受单个参数表达式。|
 
   > 假如有一集合：
-  ```
+  ```bash
   { "_id" : 1, "item" : "abc1", description: "product 1", qty: 300 }  
   { "_id" : 2, "item" : "abc2", description: "product 2", qty: 200 }  
   { "_id" : 3, "item" : "xyz1", description: "product 3", qty: 250 }  
@@ -777,7 +781,7 @@ Mongodb 提供了强大的聚合操作，有 3 中方式：
   ```
 
   要求：确定 qty 是否大于 250 或者小于 200
-  ```
+  ```bash
   > db.article.aggregate([{ $project:{ "item" : 1, "result":{$and: [{$gt:["$qty" ,250]},{ $lt:["$qty" ,320]}]}}])
   > { "_id" : 1, "item" : "abc1", "result" : true }  
   { "_id" : 2, "item" : "abc2", "result" : false }  
@@ -801,7 +805,7 @@ Mongodb 提供了强大的聚合操作，有 3 中方式：
   |\$allElementsTrue|如果集合的所有位置的元素的值都为 true，则返回 true;否则,返回 false。接受单个参数表达式。|
 
   集合数据:
-  ```
+  ```bash
   { "_id" : 1, "A" : [ "red", "blue" ], "B" : [ "red", "blue" ] }  
   { "_id" : 2, "A" : [ "red", "blue" ], "B" : [ "blue", "red", "blue" ] }  
   { "_id" : 3, "A" : [ "red", "blue" ], "B" : [ "red", "blue", "green" ] }  
@@ -814,7 +818,7 @@ Mongodb 提供了强大的聚合操作，有 3 中方式：
   ```
 
   示例：输出 A 于 B 之间的交集
-  ```
+  ```bash
   db.test1.aggregate([{  
       $project:{  
           _id: 0, A:1, B:1, jiaoji:{$setUnion:["$A","$B"]}  
@@ -864,7 +868,7 @@ Mongodb 提供了强大的聚合操作，有 3 中方式：
   |\$trunc|去除小数部分。|
 
   集合：
-  ```
+  ```bash
   { "_id": 1, "start": 5, "end": 8 }  
   { "_id": 2, "start": 4, "end": 4 }  
   { "_id": 3, "start": 9, "end": 7 }  
@@ -872,7 +876,7 @@ Mongodb 提供了强大的聚合操作，有 3 中方式：
   ```
 
   示例：求 start 减去 end 的绝对值
-  ```
+  ```bash
   db.test2.aggregate([
     {  
       $project:{  
@@ -920,15 +924,15 @@ Mongodb 提供了强大的聚合操作，有 3 中方式：
 
 > 单目的聚合命令，常用的：count()、distinct()，与聚合管道相比，单目的聚合操作更简单，使用非常频繁。先通过  distinct() 看一下工作流程。
 
-![单目的聚合操作](images/单目的聚合操作.jpg)
+<img :src="$withBase('/images/mongodb/单目的聚合操作.jpg')">
 
 求出集合 article 中 time 值大于 2017-04-09 的文档个数
-```
-db.article.count( { time: { \$gt: new Date('04/09/2017') } } )
+```bash
+db.article.count( { time: { $gt: new Date('04/09/2017') } } )
 ```
 上面的语句的等价于：
-```
-db.article.find( { time: { \$gt: new Date('04/09/2017') } } ).count()
+```bash
+db.article.find( { time: { $gt: new Date('04/09/2017') } } ).count()
 ```
 ## 10、Mongodb 的索引和 explain 的使用
 
@@ -937,34 +941,34 @@ db.article.find( { time: { \$gt: new Date('04/09/2017') } } ).count()
 > 索引是对数据库表中一列或多列的值进行排序的一种结构，可以让我们查询数据库变得 更快。MongoDB 的索引几乎与传统的关系型数据库一模一样，这其中也包括一些基本的查 询优化技巧。
 
 - 创建索引
-```
-db.student.ensureIndex({“name”: 1})  // 给 name 列创建索引
+```bash
+db.student.ensureIndex({"name": 1})  // 给 name 列创建索引
 ```
 - 获取当前集合的所有索引
-```
+```bash
 db.student.getIndexes()  // 获取 student 的索引
 ```
 - 删除索引
-```
-db.student.dropIndex({“name”:1})  // 删除 student 的 name 索引
+```bash
+db.student.dropIndex({"name":1})  // 删除 student 的 name 索引
 ```
 - 复合索引
 
 数字 1 表示 name 键的索引按升序存储，-1 表示 age 键的索引按照降序方式存储
-```
-db.student.ensureIndex({“name”:1, “age”:-1})  // 创建复合索引
+```bash
+db.student.ensureIndex({"name":1, "age":-1})  // 创建复合索引
 ```
 该索引被创建后，基于 name 和 age 的查询将会用到该索引，或者是基于 name 的查询也会用到该索引，但是只是基于 age 的查询将不会用到该复合索引。
 
 因此可以说， 如果想用到复合索引，必须在查询条件中包含复合索引中的前 N 个索引列。然而如果查询条件中的键值顺序和复合索引中的创建顺序不一致的话，MongoDB 可以智能的帮助我们调 整该顺序，以便使复合索引可以为查询所用。如
-```
-> db.student.find({“age”:24,“name”:”stu1”})
+```bash
+> db.student.find({"age":24,"name":"stu1"})
 ```
 对于上面示例中的查询条件，MongoDB 在检索之前将会动态的调整查询条件文档的顺 序，以使该查询可以用到刚刚创建的复合索引
 
 对于上面创建的索引，MongoDB 都会根据索引的 keyname 和索引方向为新创建的索引自动分配一个索引名，下面的命令可以在创建索引时为其指定索引名，如：
-```
-> db.student.ensureIndex({“name”:1},{“name”:”userIndex”})  // 创建索引时为其指定索引名
+```bash
+> db.student.ensureIndex({"name":1},{"name":"userIndex"})  // 创建索引时为其指定索引名
 ```
 随着集合的增长，需要针对查询中大量的排序做索引。如果没有对索引的键调用 sort， MongoDB 需要将所有数据提取到内存并排序。因此在做无索引排序时，如果数据量过大以 致无法在内存中进行排序，此时 MongoDB 将会报错。
 
@@ -972,11 +976,11 @@ db.student.ensureIndex({“name”:1, “age”:-1})  // 创建复合索引
 - 唯一索引
 
 在缺省的情况下创建的索引均不是唯一索引。下面示例创建唯一索引：
-```
-db.student.ensureIndex({“userId” : 123}, {“unique”: true})
+```bash
+db.student.ensureIndex({"userId" : 123}, {"unique": true})
 ```
 唯一索引创建后，如果再次插入重复的文档时，mongodb 就会报错，以提示插入了重复键。
-```
+```bash
 > db.user.insert({"userid": 1,"username":"zhangsan","age":23,"sex":"男"})
 WriteResult({
   "nInserted" : 0,
@@ -987,7 +991,7 @@ WriteResult({
 })
 ```
 如果插入的文档中不包含 userid 键，name 文档中该键的值就为 null，如果多次插入类似的文档，mongodb 将会报同样的错误。
-```
+```bash
 > db.user.insert({"name": "lisi"})
 WriteResult({ "nInserted" : 1 })
 > db.user.insert({"name": "wangwu"})
@@ -1002,7 +1006,7 @@ WriteResult({
 - 复合唯一索引
 
 我们同样可以创建复合唯一索引，即保证复合键值唯一即可
-```
+```bash
 > db.user.ensureIndex({"userid":1,"age":1},{"unique":true})
 ```
 ### 10.2、索引的一些参数
@@ -1019,14 +1023,14 @@ WriteResult({
 |language_override|string|对于文本索引，该参数指定了包含在文档中的字段名，语言覆盖默认的 language，默认值为 language.|
 
 > 如果在为已有数据的文档创建索引时，可以执行下面的命令，以使 MongoDB 在后台创建索引，这样的创建时就不会阻塞其他操作。但是相比而言，以阻塞方式创建索引，会使整个创建过程效率更高，但是在创建时 MongoDB 将无法接收其他的操作。
-```
+```bash
 > db.user.ensureIndex({"userid":1},{"background":true})
 ```
 ### 10.3、explain 的使用
 
 explain 是非常有用的工具，会帮助你获得查询方面诸多有用的信息。只要对游标调用
 该方法，就可以得到查询细节。explain 会返回一个文档，而不是游标本身。如：
-```
+```bash
 > db.user.find().explain()
 {
   "queryPlanner" : {        
@@ -1053,8 +1057,8 @@ explain 是非常有用的工具，会帮助你获得查询方面诸多有用的
 > **explain 会返回查询使用的索引情况，耗时和扫描文档数的统计信息。**
 
 ### 10.4、explain executionStats 查询具体的执行时间
-```
-> db.user.find().explain( “executionStats”)
+```bash
+> db.user.find().explain( "executionStats")
 {
   "executionStats" : {
     "executionSuccess" : true,
@@ -1087,4 +1091,4 @@ explain 是非常有用的工具，会帮助你获得查询方面诸多有用的
   "ok" : 1
 }
 ```
-关注输出的如下数值：explain.executionStats.executionTimeMillis
+__关注输出的如下数值：explain.executionStats.executionTimeMillis__

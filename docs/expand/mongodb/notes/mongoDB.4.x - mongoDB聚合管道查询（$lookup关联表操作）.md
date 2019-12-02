@@ -1,8 +1,8 @@
 # MongoDB高级查询aggregate聚合管道（$lookup关联表操作）
 
 - 范例数据
-  ```
-  // order表
+  ```bash
+  # order表
   > db.order.find().pretty()
   {
     "_id" : ObjectId("5cd8e2f0222fd632a3a40e51"),
@@ -28,7 +28,7 @@
     "price" : 60,
     "all_num" : 3
   }
-  // order_item表
+  # order_item表
   > db.order_item.find().pretty()
   {
     "_id" : ObjectId("5cd8e37d222fd632a3a40e54"),
@@ -66,14 +66,14 @@
 - $lookup（表关联2表关联）
   > 基本形式
 
-  ```
+  ```bash
   db.collectionName.aggregate([
 	{
         $lookup: {
-            from: 'collectionName1', // collectionName与collectionName1进行关联
-            localField: 'xxxx', // collectionName关联的字段
-            foreignField: 'yyy', // collectionName1关联的字段
-            as: 'zzz' // 关联完成后的数据放在zzz字段中
+            from: 'collectionName1', # collectionName与collectionName1进行关联
+            localField: 'xxxx', # collectionName关联的字段
+            foreignField: 'yyy', # collectionName1关联的字段
+            as: 'zzz' # 关联完成后的数据放在zzz字段中
         }
     }
   ])
@@ -81,7 +81,7 @@
   ```
 
 - 示例：表order和表order_item通过order_id 进行关联
-  ```
+  ```bash
   db.order.aggregate([
     {
         $lookup: {
@@ -157,5 +157,6 @@
 
 - $lookup (表关联 N表关联)
   表结构：
-  ![N表关联](images/N表关联.jpg)
+
+  <img :src="$withBase('/images/mongodb/N表关联.jpg')">
   ....

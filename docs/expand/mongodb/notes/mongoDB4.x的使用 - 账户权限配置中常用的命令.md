@@ -8,13 +8,13 @@
    修改当前库下的用户
 4. db.auth('auth': 'password')
    密码认证，如下使用方式
-   ```
-   C:\Users\DELL>mongo admin	// 需要连接的数据库
+   ```bash
+   C:\Users\DELL>mongo admin	# 需要连接的数据库
    MongoDB shell version v4.0.8
    connecting to: mongodb://127.0.0.1:27017/admin?gssapiServiceName=mongodb
        Implicit session: session { "id" : UUID   ("cfcf0072-12a3-46f8-87ba-00069194eead") }
    MongoDB server version: 4.0.8
-   > db.auth('admin','123456') // 使用auth(用户，密码) 认证登录，登录成功就能操作数   据库了
+   > db.auth('admin','123456') # 使用auth(用户，密码) 认证登录，登录成功就能操作数据库了
    1
    > show dbs
    admin    0.000GB
