@@ -5,3 +5,10 @@
 .page-nav {
     max-width: unset !important;
 }
+
+/* 修改iframe的样式 */
+iframe{
+    width: 100%;
+    height: 250px;
+    border: none;
+}

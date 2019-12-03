@@ -1,9 +1,12 @@
 module.exports = [
     {
         title: '经典算法案例',
-        collapsable: true,
+        collapsable: false,
+        path: '/algorithm/',
         children: [
-            '/algorithm/notes/one'
+            'notes/one',
+            'notes/two',
+            'notes/three'
         ]
     }
 ]
