@@ -1,4 +1,4 @@
-let a = {
+  let a = {
     value: 1
   };
   
@@ -32,4 +32,5 @@ let a = {
     return result;
   }
   
-  getValue.myCall(a, 'kk', '28');
+  getValue.myCall(a, 'kk', '28'); // 'kk' '28' 1
+  
