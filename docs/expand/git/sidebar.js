@@ -17,7 +17,8 @@ module.exports = [
             'notes/git和github远程库进行交互 - 本地库连接远程库（可推拉操作）',
             'notes/git和github远程库进行交互 - 克隆远程库和给克隆成员推送权限',
             'notes/git和github远程库进行交互 - 跨团队协作（fork操作）',
-            'notes/git和github远程库进行交互 - SSH登录'
+            'notes/git和github远程库进行交互 - SSH登录',
+            'notes/git日常知识点积累'
         ]
     }
 ]
