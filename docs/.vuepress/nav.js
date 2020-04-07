@@ -7,6 +7,12 @@ module.exports = [ // 导航栏配置 nav.js
         ]
     },
     {
+        text: '后端基础',
+        items: [
+            { text: 'java', link: '/back-base/java/' }
+        ]
+    },
+    {
         text: '拓展',
         items: [
             { text: 'git', link: '/expand/git/' },
