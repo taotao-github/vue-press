@@ -136,7 +136,7 @@ b = (byte) (b + 2);
 
 
 
-## 语句
+## **语句**
 
 ## 函数
 ### 什么是函数？
@@ -149,7 +149,7 @@ b = (byte) (b + 2);
   return 返回值;
 }
 
-// 返回值类型：函数运行后的结果的数据类型
+// 返回值类型：函数运行后的结果的数据类型,没有具体的返回值时，返回值类型为void
 // 参数类型：是形式参数的数据类型
 // 实际参数：是一个变量，用于存储调用函数是传递给函数的实际参数
 // return： 用于结束函数
@@ -161,12 +161,116 @@ b = (byte) (b + 2);
 class FunctionDemo
 {
   public static void main (String[] args) {
+    int x = 5;
+    getResule(x);
+  }
 
+  /*
+    定义一个数的 * 3 + 5 结果
+  */
+  static int getResule (int num) {
+    return num * 3 + 5;
+  }
+
+  /*
+    定义一个功能，用于打印矩形
+  */
+  static void printRecent (int height, int width) {
+    for (int i = 0; i < height; i++)   {
+      for (int j = 0; j < width; j++){
+        System.out.print("* ");
+      }
+      System.out.print("\n");
+    }
+  }
+
+  /*
+    打印99乘法口诀
+  */
+  static void print99 () {
+    for (int i = 1; i<= 9; ++i) {
+      for (int j = 1; j <= i; j++) {
+        System.out.print(j +"x" + i + "=" + i*j + "\t" );
+      }
+      System.out.print("\n");
+    }
   } 
+}
+```
 
-    
+### 函数的重载
+* 重载的含义：在同一类中，允许出现一个以上的同名函数，只要它们的参数个数或者参数类型或者参数顺序不同即可。
+* 重载的特点：与返回值无关，只看参数列表。
+* 重载的好处：方便阅读，优化程序设计，扩展程序
+
+示例：
+```java
+// 返回两个数的和
+int add (int a, int b) { return a+b; }
+// 返回3个数的和
+int add（int a, int b, int c）{ return a + b + c; // return add(a, b) + c; }
+// 返回两个小数的和
+double add (double a, double b) { return a + b; }
+```
+
+## 数组
+### 含义
+同一种类型数据的集合，其实数组就是一个容器。可以自动给数组中的元素进行编号，从0开始。
+
+### 格式
+* 格式1
+```java
+// 元素类型[] 数组名称 = new 元素类型[元素个数或数组长度]
+// 示例
+int[] arr = new int[10];
+```
+
+* 格式2
+```java
+// 元素类型[] 数组名称 = new 元素类型[]{元素1， 元素2， ...}
+
+// 示例
+int[] arr = new int[]{1, 2, 5, 4};
+int[] arr1 = {1, 2, 4, 5}
+
+// 注意，使用数组可能会出现数组角标越界或者是空指针异常的错误
+```
+
+### 数组操作
+* 获取数组的长度 length
+
+```java
+// 定义功能，打印数组中的元素，元素之间使用逗号隔开
+void printArr (int[] arr) {
+  for (int i = 0, j = arr.length; i < j; i++) {
+    System.out.print(arr[i] + ",");
+  }
+}
+```
+
+### 数组排序
+
+#### 方式1（选择排序）
+原理
+
+<img :src="$withBase('/images/java/java数组排序方式1.png')" alt="java数组排序方式1">
+
+```java
+int sortChange (int[] arr) {
+  int len = arr.length;
+  int min = arr[0];
+  for (int i = 1; i < len; i++) {
+    for (int j = x; j < len; j++>) {
+      if (min > arr[j]） {
+        int temp = min;
+        min = arr[j];
+        arr[j] = temp;
+      }
+    }
+  }
+
+  return arr;
 }
 ```
 
 
-## 数组
