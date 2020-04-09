@@ -327,3 +327,150 @@ static int[] selectSort (int[] arr) {
 	}
 
 ```
+
+### 数组查找
+#### 折半查找
+原理：必须是排好序的数组，通过每次折半查找缩短查找范围。
+```java
+// 方式1
+  static int binarySearch (int[] arr, int key) {
+		int min, max, mid;
+		min = 0;
+		max = arr.length - 1;
+		mid = (min + max) / 2;
+
+		while (key != arr[mid]) {
+			if (key > arr[mid])
+			{
+				min = mid + 1;
+			}
+			else
+			{
+				max = mid -1;
+			}
+			
+			if (min > max)
+			{
+				return -1;
+			}
+			
+			mid = (min + max) / 2;
+			
+		}
+		return mid;
+	}
+
+  // 方式2
+  static int binarySearch2 (int[] arr, int key) {
+		int min, max, mid;
+		min = 0;
+		max = arr.length - 1;
+		mid = (min + max) / 2;
+
+		while (min <= max) {
+			mid = (min + max) / 2;
+			if (key > arr[mid]) min = mid + 1;
+			else if (key < arr[mid]) max = mid - 1;
+			else return mid;
+			
+		}
+		return -1;
+	}
+
+```
+
+#### 使用折半，将制定的数值插入到数组中，并保证数组还是排好序的，返回这个数应插的位置。
+ ```java
+  // 方式2
+  static int binarySearch2 (int[] arr, int key) {
+		int min, max, mid;
+		min = 0;
+		max = arr.length - 1;
+		mid = (min + max) / 2;
+
+		while (min <= max) {
+			mid = (min + max) / 2;
+			if (key > arr[mid]) min = mid + 1;
+			else if (key < arr[mid]) max = mid - 1;
+			else return mid;
+			
+		}
+		return mid; // 返回min就行了
+	}
+
+```
+
+### 进制转换
+
+#### 十进制转二进制
+```java
+  static StringBuffer tenToBin(int num) {
+		StringBuffer sb = new StringBuffer();
+		while(num > 0) { // 这种方式只能算正数，不能算负数，使用位运算即可解决，模式如下。
+			sb.append(num % 2);
+			num /= 2;
+		}
+		return sb.reverse();
+	}
+```
+
+#### 十进制转16进制
+```java
+  // 方式1
+  static StringBuffer tenToHex(int num) {
+		StringBuffer sb = new StringBuffer();
+		while(num > 0) {
+			int end = num & 15;
+			
+			// 判断end是否大于9，是就是用相应的字母代替
+			if (end > 9)
+				sb.append((char)(end - 10 + 'A'));
+			else
+				sb.append(end);
+
+			// 处理完最后4位，在次向右移动4位
+			num = num >>> 4;
+		}
+		return sb.reverse();
+	} 
+
+  // 方式2 (查表法)
+  static StringBuffer tenToHex2(int num) {
+		StringBuffer sb = new StringBuffer();
+		String[] tb = {"0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "A", "B", "C", "D", "E", "F"};
+		while(num > 0) {
+			int end = num & 15;
+			// 进行查表对应
+			sb.append(tb[end]);
+			// 处理完最后4位，在次向右移动4位
+			num = num >>> 4;
+		}
+		return sb.reverse();
+	}
+```
+
+
+### 二维数组
+
+#### 格式
+* 格式1
+```java
+int[][] arr = new int[2][3];
+
+// 定义名称为arr的二维数组
+// 二维数组中有2个一维数组，并且每个一维数组中包含3个元素
+// 类似表格
+```
+<img :src="$withBase('/images/java/java二维数组定义1.png')" alt="java二维数组定义1">
+
+* 格式2
+```java
+int[][] arr = new int[3][]
+// 二维数组中有3个一维数组
+// 每个一维数组都是默认初始值为null
+// 可以对这三个以为数组分别进行初始化
+// arr[0] = new int[3];
+// arr[1] = new int[2];
+// arr[2] = new int[5];
+```
+<img :src="$withBase('/images/java/java二维数组定义2.png')" alt="java二维数组定义2">

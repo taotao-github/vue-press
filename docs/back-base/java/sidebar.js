@@ -8,6 +8,7 @@ module.exports = [
           'notes/java开发体验-helloworld',
           'notes/java classPath环境变量配置',
           'notes/java语言基础组成',
+          'notes/java面向对象',
       ]
   }
 ]
