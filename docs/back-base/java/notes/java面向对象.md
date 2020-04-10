@@ -399,6 +399,8 @@ class StaticDemo
 ### static在内存的特征
 <img :src="$withBase('/images/java/java static在内存中的位置.png')" alt="java static在内存中的位置">
 
+> 静态会单独在开闭一块内存空间来存储。
+
 ### 使用static的注意项
 * 静态方法只能访问静态成员。
 * 静态方法中不能有this、super关键字：因为static优先于对象存在，所以不能使用this、super关键字
@@ -434,6 +436,75 @@ class MainDemo
 ```
 
 ### 静态的应用
+> 使用静态封装工具类
+```java
+class ArrayTools{
+	// 私有化空参数构造函数，使该类不能创建对象。
+	private ArrayTools(){}
+
+	// 获取数组中的最大值
+	public static int getMax(int[] arr){
+		int max = arr[0];
+		for (int i = 1, len = arr.length; i < len; i++){
+			if (max < arr[i]) {
+				max = arr[i];
+			}
+		}
+
+		return max;
+	}
+
+	// 将数组选择排序
+	public static int[] selectSort (int[] arr) {
+		for(int i = 0; i < arr.length; i++){
+			for (int j = i ; j < arr.length; j++) {
+				if (arr[i] > arr[j]) {
+					changeArray(arr, i, j);
+				}
+			}
+		}
+		return arr;
+	}
+
+	// 旋转值
+	private static void changeArray (int[] arr, int a, int b) {
+		int temp = arr[a];
+		arr[a] = arr[b];
+		arr[b] = temp;
+	}
+}
+```
+```java
+// ArrayToolsDemo.java
+class ArrayToolsDemo{
+	public static void main(String[] args){
+		int[] arr = {2, 3, 6, 4 ,12, 32, 20};
+		// 主函数发现ArrayTools，首先在当前目录下找ArrayTools.class文件，没有在找一遍ArrayTools.java, 有就编译它，没有在去classpath路径找，还是没找到就报错。
+		System.out.println(ArrayTools.getMax(arr));
+
+		// 排序
+		int[] res = ArrayTools.selectSort(arr);
+		for (int i = 0; i < res.length; i++)
+		{
+			System.out.print(res[i] + ",");
+		}
+	}
+}
+```
+
+:::warning 提示
+使用别人给的工具类时，可能不在当前运行类的目录下，这时运行就是报错，解决这个问题有2个思路，1：就是将别人的工具类放在当前运行类同目录。2：设置classpath路径，让虚拟机在指定的路径下去找，当然这时候得注意下，设置classpath的时候记得带上当前位置，否则会出现运行类不存在设置的classpath路径下，就会出现编译成功，运行失败的现象。应该这样设置：set classpath = .;别人工具类所在路径; (注意 “.” 代表当前目录)
+:::
+
+### 帮助文档的制作javadoc
+> 当我们编写好工具类后，通常会把编译好的class文件给别人使用，但是class文件是电脑能识别的文件，因此我们需要给这个class制作使用说明书。类似java api文档那样。
+
+```bash
+javadoc -d 导出的路径 java文件
+# 执行命令后，java将会将改java文件中的所有文档注释，生成对应的文档说明。
+```
+
+### 静态代码块
 
 
 ## 单例设计模式
