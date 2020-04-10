@@ -368,6 +368,72 @@ class Person
 
 
 ## static 关键字
+用于修饰成员（成员变量或者是成员方法），不能修饰局部
+
+### static修饰后的成员具备的特点
+* 随着类的加载而加载（类一加载进内存就会加载）
+* 优先于对象存在。（先有类在有对象，注意上一条特性）
+* 被所以对象所共享。（所有对象都共享静态成员）
+* 可以直接被类名调用。也可以被对象调用
+```java
+class Person
+{
+	String name;
+	static String country = "CN"; // 这样所有对象都公用这个数据，并且修改会影响全部对象
+	
+	public void show () {
+		System.out.print("name=" + name + ",country=" + country);
+	}
+}
+
+class StaticDemo
+{
+	public static void main(String[] args){
+		Person p = new Person();
+		System.out.println(p.country);
+		System.out.println(Person.country);
+	}
+}
+```
+
+### static在内存的特征
+<img :src="$withBase('/images/java/java static在内存中的位置.png')" alt="java static在内存中的位置">
+
+### 使用static的注意项
+* 静态方法只能访问静态成员。
+* 静态方法中不能有this、super关键字：因为static优先于对象存在，所以不能使用this、super关键字
+* 主函数是静态的
+
+### 主函数的定义
+- public：代表着该函数的访问权限是最大的。
+- static：代表着主函数随着类的加载就已经存在了。
+- void：代表主函数没有具体的返回值
+- main：不是关键字，但是是一个特殊的单词，可以被虚拟机识别。 主函数是固定的，被jvm识别
+  - String[] args: main函数的参数，参数是一个字符串数组。
+
+
+```java
+class MainDemo
+{
+	public static void main(String[] args){
+		/*
+			主函数是给jvm调用的，在使用java 命令运行class文件时，后面跟带参数的，如：
+			java test "aa" "bb" "cc"
+		*/
+
+		for (int i = 0;  i < args.length; i++)
+		{
+			System.out.print(args[i]); // 即可打印出通过java命令后带的参数。
+		}
+		// 其次，因为是主函数是静态的，因此可以在函数类使用类名调用
+		String[] arr = {"this", "my", "args"};
+		MainDemo.main(arr);
+
+	}
+}
+```
+
+### 静态的应用
 
 
 ## 单例设计模式
