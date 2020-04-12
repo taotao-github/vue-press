@@ -517,6 +517,10 @@ class StaticCode{
 	static {
 		System.out.println("a");
 	}
+
+  public static void show () {
+    System.out.println("show run");
+  }
 }
 
 class StaticCodeDemo{
@@ -527,6 +531,10 @@ class StaticCodeDemo{
 		new StaticCode(); // 创建对象，会找对象的类，此时就会打印对应的静态代码块。
 		new StaticCode(); // 再次new staticCode()，因为StaticCode已经在内存中了，就不会在打印了。
 		System.out.println("over");
+
+
+    // 不使用new StaticCode() 的方式，也能是加载StaticCode.class。（直接使用类名.静态成员 也要加载对应的class文件）
+    StaticDemo.show();  // 打印 a，show run
 	}
 	static {
 		System.out.println("c");
@@ -535,5 +543,8 @@ class StaticCodeDemo{
 
 // 打印顺序 b c a over
 ```
+
+## 对象的初始化过程
+
 
 ## 单例设计模式
