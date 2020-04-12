@@ -505,6 +505,35 @@ javadoc -d 导出的路径 java文件
 ```
 
 ### 静态代码块
+* 格式
+```java
+static {
+	// 静态代码块中的执行语句。
+}
+```
+* 特点：随着类的加载而执行，但是只执行一次。
+```java
+class StaticCode{
+	static {
+		System.out.println("a");
+	}
+}
 
+class StaticCodeDemo{
+	static {
+		System.out.println("b");
+	}
+	public static void main ( String[] args){
+		new StaticCode(); // 创建对象，会找对象的类，此时就会打印对应的静态代码块。
+		new StaticCode(); // 再次new staticCode()，因为StaticCode已经在内存中了，就不会在打印了。
+		System.out.println("over");
+	}
+	static {
+		System.out.println("c");
+	}
+}
+
+// 打印顺序 b c a over
+```
 
 ## 单例设计模式
