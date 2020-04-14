@@ -595,5 +595,74 @@ Person p = new Person(); 程序到底做了什么
 
 ## 对象调用成员的过程
 
+<img :src="$withBase('/images/java/java对象的调用过程.png')" alt="java对象的调用过程">
+
 
 ## 单例设计模式
+> 解决一个类在内存中只存在一个对象。
+
+### 想要保证对象的唯一
+* 为了避免其他程序过多的建立该类对象，先禁止其他程序建立该类对象。
+* 为了让其他程序可以访问到该类对象，只好在本类中，自定义一个对象。
+* 为了方便其他程序对自定义对象的访问，可以对外提供一些访问方式。
+
+
+### 单例设计模式方式1（饿汉式）
+> 先初始化对象, Single类一进内存就创建了对象（开发一般用这个）
+```java
+class Single{
+	private int num;
+	private Single(){} // 步骤1
+	static Single single = new Single(); // 步骤2 
+
+	public void setNum(int num) {
+		this.num = num;
+	}
+	public int getNum(){
+		return num;
+	}
+
+	public static Single getInstance(){ // 步骤3
+		return single;
+	}
+}
+
+class SingleDemo{
+	public static void main(String[] args){
+		Single s1 = Single.getInstance();
+		Single s2 = Single.getInstance();
+		s1.setNum(23);
+
+		System.out.println(s2.getNum()); // 23
+	}
+}
+
+/*
+类该怎么描述就怎么描述。
+想要该类成为单例对象，只需要加上以上三个步骤就行了。
+*/
+
+```
+
+### 单例设计模式方式2（懒汉式）
+> 调用方法时才初始化。
+```java
+class Single{
+	private int num;
+	private Single(){} // 步骤1
+	static Single single = null // 步骤2 
+
+	public void setNum(int num) {
+		this.num = num;
+	}
+	public int getNum(){
+		return num;
+	}
+
+	public static Single getInstance(){ // 步骤3
+		if(single == null) 
+			single =  new Single();
+		return single
+	}
+}
+```
