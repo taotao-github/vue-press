@@ -59,7 +59,7 @@
    ```
 
 2. 远程库配置ssh keys
-   ![远程库配置ssh](\images\git\远程库配置ssh.jpg)
+   <img :src="$withBase('/images/git/远程库配置ssh.jpg')" alt="远程库配置ssh">
 
 3. 本地使用远程库的ssh项目地址并设置别名
    ```bash
