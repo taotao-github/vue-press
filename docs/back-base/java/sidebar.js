@@ -9,6 +9,7 @@ module.exports = [
           'notes/java classPath环境变量配置',
           'notes/java语言基础组成',
           'notes/java面向对象',
+          'notes/java继承',
       ]
   }
 ]
