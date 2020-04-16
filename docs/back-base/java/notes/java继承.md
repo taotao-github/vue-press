@@ -30,6 +30,10 @@ class Fu{
 
 class Zi extends Fu{
   int num = 5;
+  void show () {
+     // 使用super调用父类的变量
+    System.out.println(super.num);
+  }
 }
 
 class extendsDemo{
