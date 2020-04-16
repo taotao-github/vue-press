@@ -34,6 +34,7 @@ class Zi extends Fu{
      // 使用super调用父类的变量
     System.out.println(super.num);
   }
+  // 如果子类中出现非私有的同名变量，子类要访问本类中的变量用this，要访问父类中的同名变量要使用super
 }
 
 class extendsDemo{
@@ -45,5 +46,29 @@ class extendsDemo{
 
 ```
 
-1. 变量
-    * 当父类的变量与子类的变量同名时，子类对象调用时，子类变量将会覆盖父类的同名变量。当然子类也可以通过super关键字去访问同名的父类变量。
+::: tip 注意
+ 当父类的变量与子类的变量同名时，子类对象调用时，子类变量将会覆盖父类的同名变量。当然子类也可以通过super关键字去访问同名的父类变量。
+ :::
+
+ ## 子父类中函数的特点（重写）
+ > 当子类出现和父类一样的函数时，当子类调用该函数，会运行子类函数的内容，这样的情况称为函数的覆盖，也叫重写。
+```java
+class Fu{
+  void show(){
+    System.out.print("Fu show");
+  }
+}
+
+class Zi extends Fu{
+  void show () {
+    System.out.print("zi show");
+  }
+}
+
+class extendsDemo{
+  public static void main(String[] args){
+    Zi z = new Zi();
+    z.show(); // zi show
+  }
+}
+```
