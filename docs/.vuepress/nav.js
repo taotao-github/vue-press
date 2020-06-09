@@ -22,6 +22,13 @@ module.exports = [ // 导航栏配置 nav.js
         ]
     },
     { text: '算法题库', link: '/algorithm/' },
+    {
+        text: '前端UI',
+        items: [
+            { text: 'element', link: '/front-ui/element/' },
+            { text: 'iview', link: '/front-ui/iview/' }
+        ]
+    },
     { text: '高级组件', link: '/my-components/' },
     { text: '指南', link: '/guide/' },
     { text: '微博', link: 'https://baidu.com' }
