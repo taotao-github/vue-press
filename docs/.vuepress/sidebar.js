@@ -18,6 +18,9 @@ module.exports = { // 侧边栏配置 sidebar.js
 
     // 算法题库
     '/algorithm/': require('../algorithm/sidebar'),
-    // 算法题库
+    // 前端UI
+    '/front-ui/element/': require('../front-ui/element/sidebar'), // element
+    '/front-ui/iview/': require('../front-ui/iview/sidebar'), // iview
+    // 高级组件
     '/my-components/': require('../my-components/sidebar')
 }   

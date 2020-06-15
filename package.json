@@ -30,6 +30,7 @@
     "@grapecity/spread-sheets-print": "^13.0.7",
     "@grapecity/spread-sheets-resources-zh": "^13.0.7",
     "@grapecity/spread-sheets-vue": "^13.0.7",
+    "element-ui": "^2.13.2",
     "file-saver": "^2.0.2",
     "mddir": "^1.1.1",
     "node-sass": "^4.13.0",
