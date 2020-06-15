@@ -11,6 +11,7 @@ module.exports = { // 侧边栏配置 sidebar.js
     // 前端基础
     '/front-base/ES6/': require('../front-base/ES6/sidebar'),
     '/front-base/html/': require('../front-base/html/sidebar'),
+    '/front-base/webpack/': require('../front-base/webpack/sidebar'),
 
     // 后端基础
     '/back-base/java/': require('../back-base/java/sidebar'),
