@@ -1,38 +1,60 @@
  <template>
-  <el-table :data="tableData" style="width: 100%">
-    <el-table-column prop="date" label="日期" width="180"></el-table-column>
-    <el-table-column prop="name" label="姓名" width="180"></el-table-column>
-    <el-table-column prop="address" label="地址"></el-table-column>
-  </el-table>
+  <!-- 测试调用my-title自定义组件 -->
+ <div>
+    <my-title title="自定义标题" :btns="btns">
+      <!-- 这里通过默认插槽，显示搜素时想要 -->
+      <my-query :query="query" />  
+    </my-title> 
+   </div> 
 </template>
 
-  <script>
+<script>
+import myTitle from './components/my-title'
+import myQuery from './components/my-query'
 export default {
+  components: {
+    'my-title': myTitle,
+    'my-query': myQuery
+  },
   data() {
     return {
-      tableData: [
+      btns: [
+        { type: 'primary', name: '搜索', query: true, icon: 'el-icon-search', action: this.actionQuery }
+      ],
+      query: [
         {
-          date: "2016-05-02",
-          name: "王小虎",
-          address: "上海市普陀区金沙江路 1518 弄"
+          type: 'search',
+          label: '搜索',
+          placeholder: '请输入关键字！',
+          size: 'mini',
+          key: 'keyword',
+          align: 'auto', // flex布局，margin-right： auto使最后一个元素一直靠右, 如下新建部门就将一直靠右
+          value: '',
+          action: this.queryKeyword
         },
         {
-          date: "2016-05-04",
-          name: "王小虎",
-          address: "上海市普陀区金沙江路 1517 弄"
-        },
-        {
-          date: "2016-05-01",
-          name: "王小虎",
-          address: "上海市普陀区金沙江路 1519 弄"
-        },
-        {
-          date: "2016-05-03",
-          name: "王小虎",
-          address: "上海市普陀区金沙江路 1516 弄"
+          type: 'button',
+          label: '新建',
+          size: 'mini',
+          icon: 'el-icon-plus',
+          action: this.queryAdd
         }
       ]
+    }
+  },
+  methods: {
+    actionQuery(show) {
+      console.log(show)
+    },
+    queryKeyword(keyword) {
+      console.log(keyword)
+    },
+    queryAdd() {
+      console.log('新增')
     }
   }
 }
 </script>
+<style lang="sass" scoped>
+
+</style>
