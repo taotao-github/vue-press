@@ -9,6 +9,7 @@
 </template>
 
 <script>
+// 引入my-title 和 my-query组件
 import myTitle from './components/my-title'
 import myQuery from './components/my-query'
 export default {
@@ -28,13 +29,20 @@ export default {
           placeholder: '请输入关键字！',
           size: 'mini',
           key: 'keyword',
-          align: 'auto', // flex布局，margin-right： auto使最后一个元素一直靠右, 如下新建部门就将一直靠右
+          align: 'auto', // flex布局，margin-right： auto使后面的元素一直靠右, 如下新建就将一直靠右
           value: '',
           action: this.queryKeyword
         },
         {
           type: 'button',
           label: '新建',
+          size: 'mini',
+          icon: 'el-icon-plus',
+          action: this.queryAdd
+        },
+        {
+          type: 'button',
+          label: '新建1',
           size: 'mini',
           icon: 'el-icon-plus',
           action: this.queryAdd

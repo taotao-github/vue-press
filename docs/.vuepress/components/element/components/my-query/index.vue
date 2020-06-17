@@ -132,21 +132,24 @@ export default {
     display: flex;
     flex-wrap: wrap;
   }
-  .el-input {
-    width: 300px;
+  // .el-input {
+  //   width: 300px;
+  // }
+  .el-form-item__content .el-input-group {
+    vertical-align: middle;
   }
-  .el-input-group__append > button.el-button {
-    background: #1e5ecc;
-    color: white;
-    border: 1px solid #1e5ecc;
-    border-bottom-left-radius: 0;
-    border-top-left-radius: 0;
-  }
-  .el-input-group__append > button.el-button:active {
-    background: #4b7ed6;
-    border-color: #4b7ed6;
-    color: #fff;
-  }
+  // .el-input-group__append > button.el-button {
+  //   background: #1e5ecc;
+  //   color: white;
+  //   border: 1px solid #1e5ecc;
+  //   border-bottom-left-radius: 0;
+  //   border-top-left-radius: 0;
+  // }
+  // .el-input-group__append > button.el-button:active {
+  //   background: #4b7ed6;
+  //   border-color: #4b7ed6;
+  //   color: #fff;
+  // }
   // 搜索form下，无需校验，设置el-form-item的margin-bottom为0
   .el-form-item {
     margin-bottom: 0;

@@ -1210,10 +1210,6 @@
 	// 控制是否在搜索中跟踪符号链接。
 	"search.followSymlinks": true,
 
-	// 此设置已弃用。请改用搜索视图的上下文菜单。
-	// 控制搜索功能是显示在侧边栏，还是显示在水平空间更大的面板区域。
-	"search.location": "sidebar",
-
 	// 启用后，搜索服务进程将保持活动状态，而不是在一个小时不活动后关闭。这将使文件搜索缓存保留在内存中。
 	"search.maintainFileSearchCache": false,
 
