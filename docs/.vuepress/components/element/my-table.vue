@@ -1,10 +1,8 @@
 <template>
   <my-table
     :columns="columns"
-    :loading="loading"
     :list="list"
     :actions="actions"
-    :pageChange="getListData"
   ></my-table>
 </template>
 

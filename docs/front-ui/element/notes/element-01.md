@@ -27,5 +27,14 @@
 
 ## 自定义基础表格数据展示（my-table）
 ### 1. 组件效果
-<element-my-table></element-my-table>
+<!-- <element-my-table></element-my-table> -->
 
+
+### 2. 组件功能
+* 自定义基础表格，只是将表格和分页集成在一起。有些功能受到限制，如表格中1 代替为其他数据
+
+### 3. 涉及组件
+<<<@/docs/.vuepress/components/element/components/my-table/index.vue
+
+### 4. 使用组件
+<<<@/docs/.vuepress/components/element/my-table.vue

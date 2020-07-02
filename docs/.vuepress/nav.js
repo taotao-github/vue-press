@@ -3,6 +3,7 @@ module.exports = [ // 导航栏配置 nav.js
         text: '前端基础',
         items: [
             { text: 'ECMAScript 6', link: '/front-base/ES6/' },
+            { text: 'JavaScript核心技术开发', link: '/front-base/javascript核心技术开发/' },
             { text: 'html', link: '/front-base/html/' },
             { text: 'webpack', link: '/front-base/webpack/' },
         ]

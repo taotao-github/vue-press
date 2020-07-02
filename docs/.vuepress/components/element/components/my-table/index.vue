@@ -13,7 +13,7 @@
       </el-table-column>
     </el-table>
     <div class="my-page">
-      <el-pagination background @size-change="pageSizeChange" @current-change="pageChange" v-show="!singlePage" :page-sizes="page.pageSizes" :layout="page.layout" :total="list.total">
+      <el-pagination background @size-change="pageSizeChange" v-show="!singlePage" :page-sizes="page.pageSizes" :layout="page.layout" :total="list.total">
       </el-pagination>
     </div>
   </div>
@@ -76,9 +76,6 @@ export default {
       }
     },
     pageSizeChange(val) {
-      console.log(val)
-    },
-    pageChange(val) {
       console.log(val)
     }
   },
