@@ -7,7 +7,8 @@ module.exports = [
             '/front-base/javascript核心技术开发/notes/内存空间',
             '/front-base/javascript核心技术开发/notes/执行上下文',
             '/front-base/javascript核心技术开发/notes/变量对象',
-            '/front-base/javascript核心技术开发/notes/作用域与作用域链'
+            '/front-base/javascript核心技术开发/notes/作用域与作用域链',
+            '/front-base/javascript核心技术开发/notes/闭包'
         ]
     }
 ]
