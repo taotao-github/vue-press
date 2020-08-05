@@ -24,6 +24,7 @@ module.exports = [ // 导航栏配置 nav.js
         ]
     },
     { text: '算法题库', link: '/algorithm/' },
+    { text: '经典文章', link: '/classic/' },
     {
         text: '前端UI',
         items: [
