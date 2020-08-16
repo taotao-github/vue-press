@@ -6,6 +6,7 @@ module.exports = [
         children: [
             'notes/element-01',
             'notes/element-02',
+            'notes/element-03',
         ]
     }
 ]
