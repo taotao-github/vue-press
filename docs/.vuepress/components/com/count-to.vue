@@ -37,9 +37,11 @@ export default {
     },
     addPrefix() {
       this.prefix = "￥"
+      this.end = 300
     },
     addSuffix() {
       this.suffix = 'RMB'
+      this.end = 400
     },
     addSeparator() {
       this.end = 10000
