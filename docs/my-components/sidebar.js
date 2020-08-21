@@ -6,6 +6,7 @@ module.exports = [
             '/my-components/notes/vue-grid-layout拖拽布局组件',
             '/my-components/notes/handsontable在线Excel组件',
             '/my-components/notes/vue-count-to组件使用',
+            '/my-components/notes/vue-treeselect组件使用',
         ]
     }
 ]

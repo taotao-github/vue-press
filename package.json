@@ -23,6 +23,7 @@
   },
   "homepage": "https://github.com/taotao-github/vue-press#readme",
   "dependencies": {
+    "@riophae/vue-treeselect": "^0.4.0",
     "element-ui": "^2.13.2",
     "file-saver": "^2.0.2",
     "mddir": "^1.1.1",
