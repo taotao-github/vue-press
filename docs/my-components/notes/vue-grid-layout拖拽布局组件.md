@@ -1,7 +1,7 @@
 # 拖拽布局组件vue-grid-layout
 
 
-<my-grid-layout/>
+<grid-layout-index/>
 
 ## 使用
-<<<@/docs/.vuepress/components/my-grid-layout.vue
+<<<@/docs/.vuepress/components/grid-layout/com.vue
