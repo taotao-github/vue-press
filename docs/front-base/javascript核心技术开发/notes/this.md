@@ -109,3 +109,100 @@ console.log(test()) // 20
 在foo.getA()执行时，getA为调用者，getA为foo所拥有，因此getA函数内部的this指向了foo，这点就是与上一例对象字面量的区别。test()执行时，test为调用者，虽然test与foo.getA的引用指向同一函数，但是调用的方式不同，test引用的函数getA内部this指向了undefined，并自动指向window。
 
 
+**测试思考题**
+```javascript
+// dome4
+// 'use strict'; 严格模式将会报错
+function foo() {
+  console.log(this.a)
+}
+
+function active(fn) {
+  fn()
+}
+
+var a = 20
+var obj = {
+  a: 10,
+  getA: foo,
+  active: active
+}
+active(obj.getA) // 20
+obj.active(obj.getA) // 20
+```
+根据上面例子分析改例子，fn始终为独立调用，this在非严格模式下始终指向window。
+
+```javascript
+// dome5
+var n = 'window'
+var object = {
+  n: 'object',
+  getN: function(){
+    return function (){
+      return this.n
+    }
+  }
+}
+
+console.log(object.getN()()) // window
+```
+getN为调用者，为object的所拥有，因此getN内部this指向object，但是getN返回一个匿名函数（object.getN()此时返回的是一个函数的索引），object.getN()()执行时，实质为独立执行，因此this指向undefined，并自动指向window
+
+
+## 7.3 call/apply/bind显示指定this
+> 在Javascript内部中提供了一种可以手动设置函数内部this的指向，它们就是call/apply/bind。
+
+```javascript
+var a = 20
+var obj = {
+  a: 40
+}
+function fn(){
+  console.log(this.a)
+}
+
+// 正常调用函数fn()
+fn() // 20
+
+// 使用call/apply
+fn.call(obj) // 40
+fn.apply(obj) // 40
+
+```
+**当函数调用 call/apply 时，函数会立即执行，并改变函数内部的this指向。call和apply都会改变this的指向，不同之处在于它们的传参方式不同。**
+call的第一个参数是为函数内部指定this的指向，后续的参数则是函数函数执行时传递的参数。apply的第一个参数与call一致，不同就是后续的传参是通过数组的形式就行传递。
+
+```javascript
+function fn(num1, num2) {
+  return this.a + num1 + num2
+}
+
+var a = 20
+var obj = { a: 40 }
+
+// 正常执行
+fn(10, 10) // 40
+
+// call
+fn.call(obj, 10, 10) // 60
+
+// apply
+fn.apply(obj, [10, 10]) // 60
+```
+
+**bind也能指定函数内部的this，但是它与call/apply有所区别**
+但函数调用call/apply时，函数内部的this被显示指定，并且函数会立即执行。而使用bind时，函数并不会立即执行，而是返回一个新的函数，这个函数与原函数有着共同的函数体，但又非原函数，并且新函数的参数和this指向都已经被绑定，参数为bind的后续参数。
+```javascript
+function fn(num1, num2){
+  return this.a + num1 + num2
+}
+
+var a = 20
+var obj = { a: 40 }
+var _fn = fn.bind(obj, 1, 2)
+_fn() // 43
+_fn(1, 4) // 43 因为参数已经被绑定，因此重新传递参数是无效的
+```
+
+
+

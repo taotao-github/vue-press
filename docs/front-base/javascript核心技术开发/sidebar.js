@@ -9,7 +9,8 @@ module.exports = [
             '/front-base/javascript核心技术开发/notes/变量对象',
             '/front-base/javascript核心技术开发/notes/作用域与作用域链',
             '/front-base/javascript核心技术开发/notes/闭包',
-            '/front-base/javascript核心技术开发/notes/this'
+            '/front-base/javascript核心技术开发/notes/this',
+            '/front-base/javascript核心技术开发/notes/函数与函数式编程'
         ]
     }
 ]
