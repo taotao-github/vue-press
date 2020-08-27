@@ -90,3 +90,103 @@ async函数内部抛出错误，会导致返回的Promise对象变为reject状�
   )
   // Error: 出错了
 ```
+
+### Promise对象的状态变化
+> async韩束1返回的Promise对象，必须等到所有的await后面的Promise执行完毕，才会发生状态变化，除非遇到return或者抛出错误。也就是只有async内部所有的异步操作执行完成，才会执行then方法指定的回调函数。
+
+```javascript
+async function getTitle(url) {
+  let response = await fetch(url);
+  let html = await response.text();
+  return html.match(/<title>([\s\S]+)<\/title>/i)[1]; // return 返回值自动包裹为Promise
+}
+getTitle('https://tc39.github.io/ecma262/').then(console.log)
+
+// 上面代码中，函数getTitle内部有三个操作：抓取网页、取出文本、匹配页面标题。只有这三个操作全部完成，才会执行then方法里面的console.log。
+```
+
+### await命令
+> 正常情况下，await后面跟着一个Promise对象，返回对象的结果（resolve返回的结果，如果是reject状态则直接被async函数catch捕获），如果不是Promise对象，则直接返回对应的值
+
+```javascript
+  async function foo() {
+    await 123 // 等同于return 123
+  }
+  foo().then(res) //123
+```
+
+另一种情况，await后面跟着一个thenable对象（定义了then方法的对象），await会将其视为Promise对象
+```javascript
+class Sleep{
+  constructor(timeout) {
+    this.timeout = timeout
+  }
+  then(resolve, reject) {
+    const startTime = Date.now()
+    setTimeout(() => resolve(Date.now() - startTime), this.timeout)
+  }
+}
+
+(async () => { // async匿名函数
+  const sleepTime = await new Sleep(1000);
+  return sleepTime
+})().then(res => console.log(res));
+```
+await命令后面是一个Sleep对象的实例。这个实例不是 Promise 对象，但是因为定义了then方法，await会将其视为Promise处理。
+
+借助await命令就可以让程序停顿指定的时间实现休眠效果（可以用于倒计时设计）
+```javascript
+function countdown(time){ // 多久倒计一次
+  return new Promise((resolve, reject) => {
+    if (typeof time !== 'number') {
+      reject(new Error('require number, but' + typeof time))
+    }
+    setTimeout(resolve, time)
+  })
+}
+
+// 使用
+async function countdownTest(total, time) {
+  for(let i = total; i > 0; i--) {
+    console.log(i)
+    await countdown(time)
+  }
+}
+
+countdownTest(60, 1000)
+```
+
+任何一个await语句后面的 Promise 对象变为reject状态，那么整个async函数都会中断执行。(直接跳入catch)
+```javascript
+async function f() {
+  await Promise.reject('出错了');
+  await Promise.resolve('hello world'); // 不会执行
+}
+```
+
+我们希望前一个一步处理失败，不要中断后续的异步操作。这时就需要结构try-catch进行处理。
+```javascript
+async function f() {
+  try {
+    await Promise.reject('出错了');
+  } catch{
+
+  }
+  return await Promise.resolve('hello world');
+}
+
+f().then(v => console.log(v)) // hello world
+```
+
+
+另一种方法是await后面的 Promise 对象再跟一个catch方法，处理前面可能出现的错误。(这种方法就是处理出错的Promise，使程序继续执行)
+```javascript
+async function f() {
+  // 可能出错的地方
+  await Promise.reject('出错了').catch(error => { console.log(error) })
+  return await Promise.resolve('hello world');
+}
+
+f().then(res => console.log(res))
+```
+
