@@ -190,3 +190,42 @@ async function f() {
 f().then(res => console.log(res))
 ```
 
+## 使用注意点
+
+1. await命令做reject处理
+   ```javascript
+   // 使用try...catch处理
+   async function myFunction() {
+      try {
+        await somethingThatReturnsAPromise();
+      } catch (err) {
+        console.log(err);
+      }
+    }
+
+    // 使用reject catch处理
+    async function myFunction() {
+      await somethingThatReturnsAPromise()
+      .catch(function (err) {
+        console.log(err);
+      });
+    }
+   ```
+2. 不存在相互依赖的await，最好让他们同时触发。
+   ```javascript
+   let foo = await getFoo()
+   let bar = await getBar()
+   
+   // foo与bar相互独立，不存在相互依赖。如果写成继承关系，这样就比较耗时，完全可以让他们同时触发。
+   // 写法1
+   let [foo, bar] = Promise.all([getFoo(), getBar()])
+
+   // 写法2
+   let fooPromise = getFoo()
+   let barPromise = getBar()
+   let foo = await fooPromise
+   let bar = await barPromise
+   ```
+3. await只能用在async函数中，用于普通函数就会报错
+4. 
+
