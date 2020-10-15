@@ -33,7 +33,13 @@ module.exports = [ // 导航栏配置 nav.js
             { text: 'iview', link: '/front-ui/iview/' }
         ]
     },
-    { text: '高级组件', link: '/my-components/' },
+    {
+        text: '组件',
+        items: [
+            { text: '高级组件', link: '/components/senior-com/' },
+            { text: '自定义组件', link: '/components/custom-com/' },
+        ]
+    },
     { text: '指南', link: '/guide/' },
     { text: '微博', link: 'https://baidu.com' }
 ]

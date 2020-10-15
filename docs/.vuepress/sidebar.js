@@ -26,6 +26,10 @@ module.exports = { // 侧边栏配置 sidebar.js
     // 前端UI
     '/front-ui/element/': require('../front-ui/element/sidebar'), // element
     '/front-ui/iview/': require('../front-ui/iview/sidebar'), // iview
+
+    // 组件
     // 高级组件
-    '/my-components/': require('../my-components/sidebar')
+    '/components/senior-com/': require('../components/senior-com/sidebar'),
+    // 自定义组件
+    '/components/custom-com/': require('../components/custom-com/sidebar'),
 }   
