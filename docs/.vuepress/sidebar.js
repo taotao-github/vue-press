@@ -13,6 +13,7 @@ module.exports = { // 侧边栏配置 sidebar.js
     '/front-base/html/': require('../front-base/html/sidebar'),
     '/front-base/javascript核心技术开发/': require('../front-base/javascript核心技术开发/sidebar'),
     '/front-base/design-mode/': require('../front-base/design-mode/sidebar'),
+    '/front-base/typescript/': require('../front-base/typescript/sidebar'),
     '/front-base/webpack/': require('../front-base/webpack/sidebar'),
 
     // 后端基础
